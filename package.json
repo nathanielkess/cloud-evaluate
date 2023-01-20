@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "tsc",
-    "prepare": "npm run build",
+    "prepare": "rm -rf lib && npm run build",
     "prepublishOnly": "npm test",
     "preversion": "npx eslint ./src",
     "postversion": "git push && git push --tags",

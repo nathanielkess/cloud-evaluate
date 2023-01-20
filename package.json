@@ -1,6 +1,6 @@
 {
   "name": "cloud-evaluate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A mock async calculator evalulator that occasionally throws errors",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

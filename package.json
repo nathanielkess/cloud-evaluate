@@ -10,7 +10,10 @@
     "prepare": "npm run build",
     "prepublishOnly": "npm test",
     "preversion": "npx eslint .",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "patch": "npm version patch",
+    "minor": "npm version minor",
+    "major": "npm version major"
   },
   "repository": {
     "type": "git",

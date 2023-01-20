@@ -6,8 +6,9 @@ const evaluateFirstPass = (equation: string[]) => {
       const toCompute = [];
       
       for (let j = i - 1; j < equation.length; j++, i++) {
+        /*eslint-disable */
         if (/^\+|\-$/.test(equation[j])) break;
-
+        /*eslint-enable */
         toCompute.push(equation[j]);
       }
       

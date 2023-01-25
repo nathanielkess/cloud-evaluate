@@ -13,7 +13,8 @@
     "postversion": "git push && git push --tags",
     "patch": "npm version patch",
     "minor": "npm version minor",
-    "major": "npm version major"
+    "major": "npm version major",
+    "lint": "npx eslint src"
   },
   "repository": {
     "type": "git",

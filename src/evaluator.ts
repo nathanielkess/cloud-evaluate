@@ -2,6 +2,20 @@ import { IEvaluator } from "./evaluator.types";
 
 export class Evaluator implements IEvaluator {
 
+  private sessionStorage: string[] = []
+
+  constructor() {
+    this.sessionStorage = []
+  }
+
+  private storeEvaluation(expression: string, value?: number) {
+    if(!!value && !isNaN(value))
+      this.sessionStorage = [
+        ...this.sessionStorage,
+        `${expression}=${value}`
+      ]
+  }
+
 
   private evaluateFirstPass(equation: string[]) {
     const firstPass = [];
@@ -76,12 +90,14 @@ export class Evaluator implements IEvaluator {
         result += (firstPass[i] === "+" ? 1 : -1) * +firstPass[++i];
       }
     }
+
+    this.storeEvaluation(expression, result);
     
     return result;
   }
 
   public generateHistory() {
-    return []
+    return this.sessionStorage;
   }
 
 }

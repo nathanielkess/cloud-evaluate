@@ -1,4 +1,6 @@
 import { IEvaluator } from "./evaluator.types";
+import { probability } from './utils/probability';
+
 
 export class Evaluator implements IEvaluator {
 
@@ -6,6 +8,7 @@ export class Evaluator implements IEvaluator {
 
   constructor() {
     this.sessionStorage = []
+    this.calculate = this.calculate.bind(this);
   }
 
   private storeEvaluation(expression: string, value?: number) {
@@ -77,11 +80,11 @@ export class Evaluator implements IEvaluator {
     return res;
   }
 
-  public calculate(expression: string) {
+  public calculate(expression: string): Promise<number | undefined> {
     const firstPass = this.evaluateFirstPass(
       this.mergeSubtractionSigns(expression.match(/\d+|\D/g) || [])
     );
-    let result;
+    let result: number;
     
     if (firstPass) {
       result = +firstPass[0];
@@ -91,13 +94,23 @@ export class Evaluator implements IEvaluator {
       }
     }
 
-    this.storeEvaluation(expression, result);
     
-    return result;
+    return new Promise<number>((resolve, reject) => {
+      const passes = probability(.75);
+      if(passes) {
+        this.storeEvaluation(expression, result);
+        return resolve(result)
+      }
+      const error = new Error('whoops')
+      return reject(error);
+    })
+    
   }
 
-  public generateHistory() {
-    return this.sessionStorage;
+  public generateHistory():Promise<string[]> {
+    return new Promise((resolve) => {
+      return resolve(this.sessionStorage)
+    });
   }
 
 }

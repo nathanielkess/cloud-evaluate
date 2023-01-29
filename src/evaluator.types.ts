@@ -1,4 +1,4 @@
 export interface IEvaluator  {
-  calculate: (expression: string) => number | undefined;
-  generateHistory: () => string[]
+  calculate: (expression: string) => Promise<number | undefined>
+  generateHistory: () => Promise<string[]>;
 }

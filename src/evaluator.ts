@@ -82,7 +82,7 @@ export class Evaluator implements IEvaluator {
 
   public calculate(expression: string): Promise<number | undefined> {
     const firstPass = this.evaluateFirstPass(
-      this.mergeSubtractionSigns(expression.match(/\d+|\D/g) || [])
+      this.mergeSubtractionSigns(expression.match(/\d+(\.\d+)?|\D/g) || [])
     );
     let result: number;
     
